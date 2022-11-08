@@ -7,15 +7,23 @@ export default function Home({mangas}: { mangas: IManga[] }) {
 
     return (
         <div className={styles.container}>
+            <div>
+                <Image src={"http://localhost:5000/static/manga/6124f367ea7b3.png"} alt={"img"}
+                       width={500}
+                       height={300}
+                       max-width={768}
+                      max-height={1208}/>
+            </div>
+
             {mangas.map((manga) => {
                 return (
-                    <>
+                    <div key={manga.id}>
                         <h1>{manga.id}</h1>
                         <h2>{manga.name}</h2>
                         <h2>{manga.description}</h2>
                         <h2>{manga.author}</h2>
                         <h2>{manga.type}</h2>
-                    </>
+                    </div>
                 )
             })}
         </div>

@@ -24,3 +24,11 @@ a {
     background: black;
   }
 }
+
+.link{
+  margin: 0;
+  color: #90caf9;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(144, 202, 249, 0.4);
+}

@@ -6,3 +6,10 @@ export interface IManga {
   type: string;
   lastUpdatedTime: string;
 }
+
+export interface IUser{
+  id:number
+  name:string
+  email:string
+  isAuth:boolean
+}
