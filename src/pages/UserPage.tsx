@@ -8,7 +8,7 @@ import {initialUser, IUser, IUserStore} from "../models/types";
 
 const UserProfile = () => {
     const [user, setUser] = useState({} as IUser)
-    async function GetUserData(id:string|undefined){
+    async function GetUserData(id:string|undefined):Promise<IUser>{
         const user:IUser=initialUser
         await axios.get(`http://localhost:5000/user/${id}`, {withCredentials: true}).then((res) => {
             user.id = res.data.user.id
@@ -17,13 +17,19 @@ const UserProfile = () => {
             user.imgUrl = ""
             user.role = res.data.user.role
         })
-        setUser(user)
+
+        return user
     }
 
     const {id} = useParams()
     const rootStore = useStores();
     const userStore = rootStore.UserStore;
 
+    useEffect(()=>{
+        GetUserData(id).then((data)=>{setUser(data)
+            console.log(data)
+        })
+    },[])
     useEffect(()=>{
         GetUserData(id)
         console.log("something")

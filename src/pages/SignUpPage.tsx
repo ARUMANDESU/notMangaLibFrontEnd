@@ -28,7 +28,7 @@ export const SignUpPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    handleSignUp(data.get("username"), data.get("email"), data.get("password"));
+    handleSignUp( data.get("email"), data.get("password"));
   };
   return (
     <div>

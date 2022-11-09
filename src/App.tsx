@@ -16,7 +16,6 @@ function App() {
                 <Route path="/signin" element={<SignInPage/>}/>
                 <Route path="/signup" element={<SignUpPage/>}/>
                 <Route element={<PrivateRoute redirectTo="/signin"/>}>
-
                 </Route>
                 <Route path="/user/:id" element={<UserProfile/>}/>
             </Routes>
