@@ -56,4 +56,12 @@ export class UserStore {
       body: JSON.stringify(params),
     }).then(res=>res.json()).then((data)=>{this.setUser(data.user)})
   }
+
+  async signUpUser(params:any={}){
+    return  await fetch('http://localhost:5000/signup',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(params),
+    }).then(res=>{return  res.json()})
+  }
 }

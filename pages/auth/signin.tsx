@@ -13,15 +13,20 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Link from 'next/link';
 import {useStores} from "../../store/StoreContext";
+import {useRouter} from "next/router";
+
 
 
 export default function SignIn() {
     const rootStore = useStores()
     const userStore = rootStore.UserStore
+    const router = useRouter()
+    const {email} = router.query
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         userStore.signInUser({email:data.get("email"),password:data.get("password")})
+        router.push("/")
     };
 
     return (
@@ -58,6 +63,7 @@ export default function SignIn() {
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
+                                variant="outlined"
                                 margin="normal"
                                 required
                                 fullWidth
@@ -66,6 +72,8 @@ export default function SignIn() {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                value={email}
+                                focused={email!=null}
                             />
                             <TextField
                                 margin="normal"

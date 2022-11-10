@@ -10,23 +10,23 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Link from 'next/link';
+import {useStores} from "../../store/StoreContext";
+import {useRouter} from "next/router";
 
 
 const theme = createTheme({palette: {mode: "dark"}});
 
 export default function SignUp() {
+    const rootStore = useStores()
+    const userStore = rootStore.UserStore
+    const router = useRouter()
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            name: data.get('name'),
-            password: data.get('password'),
-        });
+        userStore.signUpUser({name:data.get('name'),email: data.get('email'),password: data.get('password'),}).then((res)=>{router.push(`/auth/signin?email=${res.user.email}`)})
     };
 
     return (
-        <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -96,6 +96,5 @@ export default function SignUp() {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
     );
 }

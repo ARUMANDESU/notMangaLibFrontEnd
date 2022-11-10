@@ -3,7 +3,6 @@ import Manga from '../components/manga/Manga'
 import {IManga} from '../models/types'
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {Box, Typography} from "@mui/material";
-import Container from "@mui/material/Container";
 
 export default function Home({mangas}: { mangas: IManga[] }) {
 

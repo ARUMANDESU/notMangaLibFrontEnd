@@ -14,9 +14,11 @@ const Navigation: React.FC = () => {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6">
-                        NotMangaLib
-                    </Typography>
+                    <Link href={"/"}>
+                        <Typography variant="h6">
+                            NotMangaLib
+                        </Typography>
+                    </Link>
                     <Box sx={{flexGrow: 0.4}}/>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         <Box sx={{flexGrow: 0.2, display: {xs: 'none', md: 'flex'}}}>
@@ -34,7 +36,7 @@ const Navigation: React.FC = () => {
                             </Link>
                         </Box>
                         <Box sx={{flexGrow: 0.2, display: {xs: 'none', md: 'flex'}}}>
-                            <Link href={"/manga"}>
+                            <Link href={"/manga/create"}>
                                 <Typography variant="h6">
                                     Create manga
                                 </Typography>
