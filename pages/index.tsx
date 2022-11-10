@@ -1,31 +1,31 @@
-import Head from 'next/head'
 import Image from 'next/image'
-import { IManga } from '../models/types'
-import styles from '../styles/Home.module.css'
+import Manga from '../components/manga/Manga'
+import {IManga} from '../models/types'
+import Grid2 from "@mui/material/Unstable_Grid2";
+import {Box, Typography} from "@mui/material";
+import Container from "@mui/material/Container";
 
 export default function Home({mangas}: { mangas: IManga[] }) {
 
     return (
-        <div className={styles.container}>
-            <div>
-                <Image src={"http://localhost:5000/static/manga/6124f367ea7b3.png"} alt={"img"}
-                       width={500}
-                       height={300}
-                       max-width={768}
-                      max-height={1208}/>
-            </div>
+        <div>
+            <Image src={"http://localhost:5000/static/images/HomePageImage.png"} alt={"HomePageImage"} width={"1920"}
+                   height={"400"}/>
+            <Box className="ml-5 px-12 pt-20">
+                <Typography variant="h4">
+                    Catalog
+                </Typography>
+                <Grid2 container rowSpacing={1} columnSpacing={{xs: 0.1}} >
 
-            {mangas.map((manga) => {
-                return (
-                    <div key={manga.id}>
-                        <h1>{manga.id}</h1>
-                        <h2>{manga.name}</h2>
-                        <h2>{manga.description}</h2>
-                        <h2>{manga.author}</h2>
-                        <h2>{manga.type}</h2>
-                    </div>
-                )
-            })}
+                    {mangas.map((manga) => {
+                        return (
+                            <Manga manga={manga} key={manga.id}/>
+                        )
+                    })}
+                </Grid2>
+            </Box>
+
+
         </div>
     )
 }
