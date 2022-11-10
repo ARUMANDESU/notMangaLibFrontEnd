@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { IManga } from '../models/types'
 import styles from '../styles/Home.module.css'
-import {IManga} from "../models";
 
 export default function Home({mangas}: { mangas: IManga[] }) {
 

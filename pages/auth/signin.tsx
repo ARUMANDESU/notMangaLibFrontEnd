@@ -12,17 +12,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Link from 'next/link';
+import {useStores} from "../../store/StoreContext";
 
 const theme = createTheme({palette:{mode:"dark"}});
 
 export default function SignIn() {
+    const rootStore = useStores()
+    const userStore = rootStore.UserStore
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        userStore.signInUser({email:data.get("email"),password:data.get("password")})
     };
 
     return (
