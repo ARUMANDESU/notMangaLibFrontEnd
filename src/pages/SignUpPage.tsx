@@ -3,23 +3,27 @@ import {
   Avatar,
   Box,
   Button,
-  Container,
+  Container, createTheme,
   CssBaseline,
   Grid,
   TextField,
+  ThemeProvider,
   Typography,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
+const theme = createTheme({ palette: { mode: "dark" } });
 export const SignUpPage = () => {
   const handleSignUp = (
+      name: FormDataEntryValue | null,
     email: FormDataEntryValue | null,
-    password: FormDataEntryValue | null
+    password: FormDataEntryValue | null,
   ) => {
     axios
       .post("http://localhost:5000/signup", {
+        name:name,
         email: email,
         password: password,
       })
@@ -28,10 +32,11 @@ export const SignUpPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    handleSignUp( data.get("email"), data.get("password"));
+    handleSignUp(data.get("name") ,data.get("email"), data.get("password"));
   };
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -73,7 +78,7 @@ export const SignUpPage = () => {
               id="username"
               label="Username"
               type="text"
-              name="username"
+              name="name"
               autoComplete="login"
             />
             <TextField
@@ -107,6 +112,7 @@ export const SignUpPage = () => {
           </Box>
         </Box>
       </Container>
+      </ThemeProvider>
     </div>
   );
 };

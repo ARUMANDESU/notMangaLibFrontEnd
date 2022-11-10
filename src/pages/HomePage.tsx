@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button/Button";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IManga } from "../models/types";
@@ -25,6 +26,10 @@ const HomePage = () => {
     return (
         <>
             <h1>HomePage!</h1>
+            <Button variant="outlined">Outlined</Button>
+            <Button variant="outlined" color="error">
+                Error
+            </Button>
             {mangas.map((manga) => {
                 return (
                     <div key={manga.id}>
