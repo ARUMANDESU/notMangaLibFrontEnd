@@ -14,7 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Link from 'next/link';
 import {useStores} from "../../store/StoreContext";
 
-const theme = createTheme({palette:{mode:"dark"}});
 
 export default function SignIn() {
     const rootStore = useStores()
@@ -26,9 +25,7 @@ export default function SignIn() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
                 <Grid
                     item
                     xs={false}
@@ -103,6 +100,5 @@ export default function SignIn() {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
     );
 }
