@@ -16,16 +16,18 @@ import {useRouter} from "next/router";
 const Index = () => {
     const router = useRouter()
     const [selectedFile, setSelectedFile] = useState({} as File);
-    const handleSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget);
-        data.append("mangaImg",selectedFile)
-        const response= await fetch("http://localhost:5000/manga/create",{
-            method:"POST",
+        data.append("mangaImg", selectedFile)
+        const response = await fetch("http://localhost:5000/manga/create", {
+            method: "POST",
             credentials: 'include',
-            body:data
+            body: data
         })
-        await response.json().then(res=>{router.push(`http://localhost:3000/manga/${res.id}`)})
+        await response.json().then(res => {
+            router.push(`http://localhost:3000/manga/${res.id}`)
+        })
     };
 
     return (
@@ -38,8 +40,8 @@ const Index = () => {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main',width: 56, height: 56  }}>
-                    <Create sx={{ fontSize: 40 }}/>
+                <Avatar sx={{m: 1, bgcolor: 'secondary.main', width: 56, height: 56}}>
+                    <Create sx={{fontSize: 40}}/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Create Manga
@@ -51,11 +53,13 @@ const Index = () => {
                         aria-label="File browser example"
                         name="mangaImg"
                         id="mangaImg"
-                        onChange={(e)=>{setSelectedFile(e.target.files[0])}}
+                        onChange={(e) => {
+                            setSelectedFile(e.target.files![0])
+                        }}
                     />
                 </Typography>
 
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Box component="form" onSubmit={handleSubmit} sx={{mt: 3}}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -97,7 +101,8 @@ const Index = () => {
                                 select
                                 label="Manga Type"
                                 name="type"
-                                onChange={(e)=>{}}
+                                onChange={(e) => {
+                                }}
                                 SelectProps={{
                                     native: true,
                                 }}
@@ -142,7 +147,7 @@ const Index = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{mt: 3, mb: 2}}
                     >
                         Create Manga
                     </Button>

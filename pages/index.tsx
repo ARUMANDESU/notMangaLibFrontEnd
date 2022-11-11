@@ -14,7 +14,7 @@ export default function Home({mangas}: { mangas: IManga[] }) {
                 <Typography variant="h4">
                     Catalog
                 </Typography>
-                <Grid2 container rowSpacing={1} columnSpacing={{xs: 0.1}} >
+                <Grid2 container rowSpacing={1} columnSpacing={{xs: 0.1}}>
 
                     {mangas.map((manga) => {
                         return (
