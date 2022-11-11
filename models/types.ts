@@ -7,6 +7,7 @@ export interface IManga {
   author: string;
   type: string;
   lastUpdatedTime: string;
+  mangaImg:string|null
 }
 
 export interface IUserStore{

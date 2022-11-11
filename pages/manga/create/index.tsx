@@ -22,7 +22,6 @@ const Index = () => {
         data.append("mangaImg",selectedFile)
         const response= await fetch("http://localhost:5000/manga/create",{
             method:"POST",
-            headers: {'Content-Type': 'multipart/form-data'},
             credentials: 'include',
             body:data
         })
