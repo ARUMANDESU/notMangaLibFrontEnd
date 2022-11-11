@@ -1,8 +1,10 @@
-import { makeObservable, observable } from "mobx";
+import {action, makeObservable, observable} from "mobx";
 import { RootStoreIml } from "./RootStore";
 import { persist } from "mobx-persist";
 import {enableStaticRendering, useStaticRendering} from "mobx-react";
 import { IUserStore } from "../models/types";
+import {cookies} from "next/headers";
+import { NextResponse } from "next/server";
 
 
 
@@ -30,6 +32,11 @@ export class UserStore {
     this.root = root;
     makeObservable(this, {
       user: observable,
+      setUser:action,
+      removeUser:action,
+      signInUser:action,
+      signUpUser:action,
+      Logout:action
     });
   }
 
@@ -63,5 +70,14 @@ export class UserStore {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(params),
     }).then(res=>{return  res.json()})
+  }
+
+  async Logout(){
+    await fetch('http://localhost:5000/logout',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      credentials:"include",
+    }).then(()=>{this.removeUser()}).catch((err)=>{
+      console.error(err)})
   }
 }

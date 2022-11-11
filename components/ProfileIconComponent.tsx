@@ -1,16 +1,19 @@
-import {Avatar, Box, IconButton, Menu, MenuItem} from "@mui/material";
+import {Avatar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {useStores} from "../store/StoreContext";
 import {useRouter} from "next/router";
 import {IUserStore} from "../models/types";
+import {UserStore} from "../store/UserStore";
 
 const ProfileIconComponent: React.FC = () => {
     const [user, setUser] = useState({} as IUserStore)
+    const [userStore, setUserStore] = useState({} as UserStore )
     const rootStore = useStores();
     const router = useRouter()
     useEffect(() => {
         setUser(rootStore.UserStore.user)
+        setUserStore(rootStore.UserStore)
     }, [])
 
     const [bIsAccountMenu, setBIsAccountMenu] = useState(false);
@@ -26,6 +29,12 @@ const ProfileIconComponent: React.FC = () => {
         setLoginMenuAnchor(null);
         setBIsAccountMenu(false);
     };
+    const handleLogout=()=>{
+        userStore.Logout().then(()=>{
+            location.reload()
+        })
+
+    }
 
     const handleAccountIconPressed = () => {
         router.push(`/user/${user.id}`);
@@ -41,12 +50,33 @@ const ProfileIconComponent: React.FC = () => {
                 horizontal: "right",
             }}
         >
-            <Link href={"/auth/signin"}>
-                <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
-            </Link>
-            <Link href={"/auth/signup"}>
-                <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            </Link>
+            {user.isAuth ? (
+                <>
+                    <MenuItem>
+                        <Link href={`/user/${user.id}`}>
+                            <Button variant="outlined" color="success">
+                                Profile
+                            </Button>
+                        </Link>
+                    </MenuItem>
+                    <MenuItem>
+                        <Button variant="outlined" color="error" onClick={handleLogout}>
+                            Log out
+                        </Button>
+                    </MenuItem>
+
+
+                </>
+            ) : (<>
+                <Link href={"/auth/signin"}>
+                    <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+                </Link>
+                <Link href={"/auth/signup"}>
+                    <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+                </Link>
+            </>)
+            }
+
         </Menu>
     );
 
@@ -60,7 +90,7 @@ const ProfileIconComponent: React.FC = () => {
                         aria-label="account of current user"
                         aria-haspopup="true"
                         color="inherit"
-                        onClick={handleAccountIconPressed}
+                        onClick={handleMenuOpen}
                     >
                         {user.imgUrl ? (
                             <Avatar src={user.imgUrl}></Avatar>
@@ -81,10 +111,11 @@ const ProfileIconComponent: React.FC = () => {
                     >
                         <Avatar></Avatar>
                     </IconButton>
-                    {loginMenu}
+
                 </>
             )}
+            {loginMenu}
         </Box>
     );
 };
-export default ProfileIconComponent;
+export default  ProfileIconComponent;

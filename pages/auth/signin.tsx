@@ -25,7 +25,7 @@ export default function SignIn() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         userStore.signInUser({email: data.get("email"), password: data.get("password")})
-        router.push("/")
+        location.replace("/")
     };
 
     return (
