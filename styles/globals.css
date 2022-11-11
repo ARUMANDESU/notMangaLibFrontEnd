@@ -41,3 +41,34 @@ a {
   object-fit: contain;
 
 }
+
+.uploader-label{
+  position: relative;
+  min-height: 110px;
+  min-width: 110px;
+  border: 2px dashed #dcdcdc;
+  border: dashed 2px;
+  border-radius: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.uploader-label-caption{
+  pointer-events: none;
+  text-align: center;
+  color: #868e96;
+  font-size: 13px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

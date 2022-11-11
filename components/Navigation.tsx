@@ -19,26 +19,12 @@ const Navigation: React.FC = () => {
                             NotMangaLib
                         </Typography>
                     </Link>
-                    <Box sx={{flexGrow: 0.4}}/>
+                    <Box sx={{flexGrow: 1}}/>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
-                        <Box sx={{flexGrow: 0.2, display: {xs: 'none', md: 'flex'}}}>
-                            <Link href={"/manga"}>
-                                <Typography variant="h6">
-                                    Manga
-                                </Typography>
-                            </Link>
-                        </Box>
-                        <Box sx={{flexGrow: 0.2, display: {xs: 'none', md: 'flex'}}}>
-                            <Link href={"/teams"}>
-                                <Typography variant="h6">
-                                    Teams
-                                </Typography>
-                            </Link>
-                        </Box>
                         <Box sx={{flexGrow: 0.2, display: {xs: 'none', md: 'flex'}}}>
                             <Link href={"/manga/create"}>
                                 <Typography variant="h6">
-                                    Create manga
+                                    Add manga
                                 </Typography>
                             </Link>
                         </Box>

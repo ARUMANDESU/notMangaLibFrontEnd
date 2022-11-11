@@ -9,13 +9,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import Container from "@mui/material/Container";
-import {Create} from "@mui/icons-material";
+import {CloudUpload, Create} from "@mui/icons-material";
 import {Input} from "@mui/material";
 import {useRouter} from "next/router";
 
 const Index = () => {
     const router = useRouter()
     const [selectedFile, setSelectedFile] = useState({} as File);
+    const [linkNum, setLinkNum] = useState(1)
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget);
@@ -48,15 +49,24 @@ const Index = () => {
                 </Typography>
                 <Typography className="mt-10">
                     Manga Cover
-                    <input
-                        type="file"
-                        aria-label="File browser example"
-                        name="mangaImg"
-                        id="mangaImg"
-                        onChange={(e) => {
-                            setSelectedFile(e.target.files![0])
-                        }}
-                    />
+                    <label className="uploader-label">
+                        <Box className="uploader-label-caption" sx={{minWidth:300,minHeight:200}}>
+                            <CloudUpload/>
+                            <Typography>
+                                Click or drag the image to upload
+                            </Typography>
+                        </Box>
+                        <input
+                            type="file"
+                            aria-label="File browser example"
+                            name="mangaImg"
+                            id="mangaImg"
+                            onChange={(e) => {
+                                setSelectedFile(e.target.files![0])
+                            }}
+                            hidden={true}
+                        />
+                    </label>
                 </Typography>
 
                 <Box component="form" onSubmit={handleSubmit} sx={{mt: 3}}>
@@ -142,6 +152,7 @@ const Index = () => {
                                 </option>
                             </TextField>
                         </Grid>
+                        
                     </Grid>
                     <Button
                         type="submit"
@@ -149,7 +160,7 @@ const Index = () => {
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
                     >
-                        Create Manga
+                        Add Manga
                     </Button>
                 </Box>
             </Box>
