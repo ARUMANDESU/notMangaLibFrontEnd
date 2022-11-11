@@ -23,3 +23,5 @@ export interface IUserStore{
 export interface IStoreContext {
   rootStore: RootStoreIml;
 }
+
+export const serverUrl='https://localhost:5000/'

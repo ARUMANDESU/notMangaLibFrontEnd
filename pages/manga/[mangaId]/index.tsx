@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import {GetServerSideProps} from "next";
-import {IManga} from "../../../models/types";
+import {IManga, serverUrl} from "../../../models/types";
 import Image from "next/image";
 import {Chip, Divider, Grid} from '@mui/material';
 import Paper from "@mui/material/Paper";
@@ -51,7 +51,7 @@ export default Index;
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps<{ mangaId: string }> = async context => {
     const params = context.params!;
-    const data = await fetch(`http://localhost:5000/manga/${params.mangaId}`).then(res => {
+    const data = await fetch(`${serverUrl}manga/${params.mangaId}`).then(res => {
         return res.json()
     }).catch((err) => {
         console.error(err)

@@ -5,7 +5,7 @@ import mangaId from "./[mangaId]";
 const Index = () => {
     return (
         <div>
-
+            something secret
         </div>
     )
 }

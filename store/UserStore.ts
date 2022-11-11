@@ -1,10 +1,9 @@
 import {action, makeObservable, observable} from "mobx";
 import { RootStoreIml } from "./RootStore";
 import { persist } from "mobx-persist";
-import {enableStaticRendering, useStaticRendering} from "mobx-react";
-import { IUserStore } from "../models/types";
-import {cookies} from "next/headers";
-import { NextResponse } from "next/server";
+import {enableStaticRendering} from "mobx-react";
+import { IUserStore, serverUrl } from "../models/types";
+
 
 
 
@@ -57,7 +56,7 @@ export class UserStore {
   }
 
   async signInUser(params: any = {}){
-    await fetch(`http://localhost:5000/signin`, {
+    await fetch(`${serverUrl}signin`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(params),
@@ -65,7 +64,7 @@ export class UserStore {
   }
 
   async signUpUser(params:any={}){
-    return  await fetch('http://localhost:5000/signup',{
+    return  await fetch(`${serverUrl}signup`,{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(params),
@@ -73,7 +72,7 @@ export class UserStore {
   }
 
   async Logout(){
-    await fetch('http://localhost:5000/logout',{
+    await fetch(`${serverUrl}logout`,{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       credentials:"include",

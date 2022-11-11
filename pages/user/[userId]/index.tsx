@@ -1,6 +1,6 @@
 import React from 'react';
 import {GetServerSideProps} from "next";
-import {IUserStore} from "../../../models/types";
+import {IUserStore, serverUrl} from "../../../models/types";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import {Grid, Typography } from '@mui/material';
@@ -41,7 +41,7 @@ export default Index;
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps<{ userId: string }> = async context => {
     const params = context.params!;
-    const data = await fetch(`http://localhost:5000/user/${params.userId}`).then(res => {
+    const data = await fetch(`${serverUrl}user/${params.userId}`).then(res => {
         return res.json()
     }).catch((err) => {
         console.error(err)

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Manga from '../components/manga/Manga'
-import {IManga} from '../models/types'
+import {IManga, serverUrl} from '../models/types'
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {Box, Typography} from "@mui/material";
 
@@ -8,8 +8,9 @@ export default function Home({mangas}: { mangas: IManga[] }) {
 
     return (
         <div>
-            <Image src={"http://localhost:5000/static/images/HomePageImage.png"} alt={"HomePageImage"} width={"1920"}
-                   height={"400"}/>
+            <Image src={`${serverUrl}static/images/HomePageImage.png`} alt={"HomePageImage"}
+                   width={"1920"}
+                   height={"400"} />
             <Box className="ml-5 px-12 pt-20">
                 <Typography variant="h4">
                     Catalog
@@ -30,7 +31,7 @@ export default function Home({mangas}: { mangas: IManga[] }) {
 }
 
 export async function getServerSideProps() {
-    const response = await fetch("http://localhost:5000/")
+    const response = await fetch(`${serverUrl}`)
     const data = await response.json()
     return {
         props: {mangas: data.manga},

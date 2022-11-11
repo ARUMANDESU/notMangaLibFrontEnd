@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import CssBaseline from "@mui/material/CssBaseline";
+
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Link from "next/link";
+
 import Container from "@mui/material/Container";
 import {CloudUpload, Create} from "@mui/icons-material";
-import {Input} from "@mui/material";
 import {useRouter} from "next/router";
+import { serverUrl } from '../../../models/types';
 
 const Index = () => {
     const router = useRouter()
@@ -21,7 +21,7 @@ const Index = () => {
         event.preventDefault()
         const data = new FormData(event.currentTarget);
         data.append("mangaImg", selectedFile)
-        const response = await fetch("http://localhost:5000/manga/create", {
+        const response = await fetch(`${serverUrl}manga/create`, {
             method: "POST",
             credentials: 'include',
             body: data
