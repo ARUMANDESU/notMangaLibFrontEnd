@@ -31,7 +31,7 @@ const ProfileIconComponent: React.FC = () => {
     };
     const handleLogout=()=>{
         userStore.Logout().then(()=>{
-            location.reload()
+            location.replace("/")
         })
 
     }

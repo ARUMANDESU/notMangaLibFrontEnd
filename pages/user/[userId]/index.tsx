@@ -22,7 +22,7 @@ const Index = ({user}:{user:IUserStore}) => {
                 ) : (
                     <Avatar sx={avatarSx} variant="rounded" ><Typography variant="h3">{user.name != null && user.name.slice(0, 1).toUpperCase()}</Typography> </Avatar>
                 )}
-
+                
             </Grid>
             <Grid item xs={12} sm={8} md={9} >
                 <Typography variant="h4">

@@ -19,11 +19,9 @@ const Manga = ({manga}: { manga: IManga }) => {
                 }}>
                     <Box sx={{
                         width: 250,
-                        height: 400,
-                        flexGrow: 1
-                    }} style={{position: "relative"}}>
-                        <Image src={img} alt={manga.name + " " + manga.author} fill={true}
-                               className={"image-fit-contain"}/>
+                        height: 450,
+                    }}>
+                        <Image src={img} alt={manga.name + " " + manga.author} layout="responsive" width={250} height={450}/>
                     </Box>
                     <Typography>
                         {manga.name}

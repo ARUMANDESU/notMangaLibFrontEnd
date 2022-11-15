@@ -1,26 +1,29 @@
 import React, {useEffect, useState} from 'react';
-
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
 import Container from "@mui/material/Container";
-import {CloudUpload, Create} from "@mui/icons-material";
+import {CloudUpload, Create, Delete} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import { serverUrl } from '../../../models/types';
+import {serverUrl} from '../../../models/types';
+import Image from "next/image";
 
 const Index = () => {
     const router = useRouter()
-    const [selectedFile, setSelectedFile] = useState({} as File);
-    const [linkNum, setLinkNum] = useState(1)
+    const [mangaCover, setMangaCover] = useState(null as File | null);
+    useEffect(() => {
+        setMangaCover(null)
+    }, [])
+    const handleDeleteMangaCover=()=>{
+        setMangaCover(null)
+    }
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget);
-        data.append("mangaImg", selectedFile)
+        data.append("mangaImg", mangaCover)
         const response = await fetch(`${serverUrl}manga/create`, {
             method: "POST",
             credentials: 'include',
@@ -47,27 +50,58 @@ const Index = () => {
                 <Typography component="h1" variant="h5">
                     Create Manga
                 </Typography>
-                <Typography className="mt-10">
-                    Manga Cover
-                    <label className="uploader-label">
-                        <Box className="uploader-label-caption" sx={{minWidth:300,minHeight:200}}>
-                            <CloudUpload/>
-                            <Typography>
-                                Click or drag the image to upload
-                            </Typography>
-                        </Box>
-                        <input
-                            type="file"
-                            aria-label="File browser example"
-                            name="mangaImg"
-                            id="mangaImg"
-                            onChange={(e) => {
-                                setSelectedFile(e.target.files![0])
-                            }}
-                            hidden={true}
-                        />
-                    </label>
-                </Typography>
+                <Box>
+                    <Typography className="mt-10">
+                        Manga Cover
+                    </Typography>
+                    {mangaCover!=null ?(
+                        <>
+                            <Box
+                                sx={{
+                                    minWidth: 250,
+                                    minHeight: 350,
+                                    backgroundSize:"cover"
+                                }}
+                                style={{backgroundImage:`url('${URL.createObjectURL(mangaCover)}')`}}
+                            >
+                                <Button
+                                    sx={{
+                                        bgcolor:"#141414",
+                                        color:"white",
+                                        "&:hover":{bgcolor:"#f44336"}
+                                }}
+                                    onClick={handleDeleteMangaCover}
+                                >
+                                    <Delete/>
+                                </Button>
+                            </Box>
+                        </>
+                    ):(
+                        <>
+                            <label className="uploader-label">
+                                <Box className="uploader-label-caption" sx={{minWidth: 250, minHeight: 350}}>
+                                    <CloudUpload/>
+                                    <Typography>
+                                        Click or drag the image to upload
+                                    </Typography>
+                                </Box>
+                                <input
+                                    type="file"
+                                    aria-label="File browser example"
+                                    accept="image/*"
+                                    name="mangaImg"
+                                    id="mangaImg"
+                                    onChange={(e) => {
+                                        setMangaCover(e.target.files![0])
+                                    }}
+                                    hidden={true}
+                                />
+                            </label>
+                        </>
+                    )}
+
+                </Box>
+
 
                 <Box component="form" onSubmit={handleSubmit} sx={{mt: 3}}>
                     <Grid container spacing={2}>
@@ -80,6 +114,7 @@ const Index = () => {
                                 id="name"
                                 label="Name"
                                 autoFocus
+                                defaultValue=""
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -92,6 +127,7 @@ const Index = () => {
                                 label="Description"
                                 name="description"
                                 autoComplete="description"
+                                defaultValue=""
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -103,6 +139,7 @@ const Index = () => {
                                 type="text"
                                 id="author"
                                 autoComplete="author"
+                                defaultValue=""
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -117,6 +154,7 @@ const Index = () => {
                                     native: true,
                                 }}
                                 helperText="Please select manga type"
+                                defaultValue="manga"
                             >
                                 <option value={"manga"}>
                                     {"Manga"}

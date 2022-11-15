@@ -44,7 +44,7 @@ a {
 
 .uploader-label{
   position: relative;
-  min-height: 110px;
+  min-height: 200px;
   min-width: 110px;
   border: 2px dashed #dcdcdc;
   border: dashed 2px;
