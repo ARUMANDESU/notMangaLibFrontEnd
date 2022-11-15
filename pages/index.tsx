@@ -8,9 +8,11 @@ export default function Home({mangas}: { mangas: IManga[] }) {
 
     return (
         <div>
-            <Image src={`${serverUrl}static/images/HomePageImage.png`} alt={"HomePageImage"}
+            <Image src={`${serverUrl}static/images/HomePageImage.png`}
+                   alt={"HomePageImage"}
                    width={"1920"}
-                   height={"400"} />
+                   height={"400"}
+            />
             <Box className="ml-5 px-12 pt-20">
                 <Typography variant="h4">
                     Catalog

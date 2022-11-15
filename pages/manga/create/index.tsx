@@ -22,8 +22,11 @@ const Index = () => {
     }
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        if(mangaCover==null){
+            return;
+        }
         const data = new FormData(event.currentTarget);
-        data.append("mangaImg", mangaCover)
+        data.append("mangaImg", mangaCover!)
         const response = await fetch(`${serverUrl}manga/create`, {
             method: "POST",
             credentials: 'include',

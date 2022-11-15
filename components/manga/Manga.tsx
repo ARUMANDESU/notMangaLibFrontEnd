@@ -10,19 +10,14 @@ const Manga = ({manga}: { manga: IManga }) => {
     const img = manga.mangaImg == null ? "" : manga.mangaImg
     return (
 
-        <Grid2 xs={2.4}>
+        <Grid2 xs={1.5}>
             <Link href={`/manga/${manga.id}`}>
                 <Box sx={{
-                    width: 250,
-                    height: 480,
+                    width: 150,
+                    height: 280,
                     flexGrow: 1
                 }}>
-                    <Box sx={{
-                        width: 250,
-                        height: 450,
-                    }}>
-                        <Image src={img} alt={manga.name + " " + manga.author} layout="responsive" width={250} height={450}/>
-                    </Box>
+                    <Image src={img} alt={manga.name + " " + manga.author} width={150} height={250}/>
                     <Typography>
                         {manga.name}
                     </Typography>
