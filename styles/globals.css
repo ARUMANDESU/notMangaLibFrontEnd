@@ -37,11 +37,6 @@ a {
   text-decoration-color: rgba(144, 202, 249, 0.4);
 }
 
-.image-fit-contain{
-  object-fit: contain;
-
-}
-
 .uploader-label{
   position: relative;
   min-height: 200px;
@@ -72,3 +67,4 @@ a {
   justify-content: center;
   flex-direction: column;
 }
+

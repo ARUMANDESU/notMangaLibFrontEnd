@@ -1,13 +1,6 @@
-import React from 'react';
-import {GetServerSideProps} from "next";
-import mangaId from "./[mangaId]";
+import React from "react";
 
 const Index = () => {
-    return (
-        <div>
-            something secret
-        </div>
-    )
-}
+    return <div>something secret</div>;
+};
 export default Index;
-

@@ -1,20 +1,20 @@
-import {Avatar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
+import { Avatar, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
-import {useStores} from "../store/StoreContext";
-import {useRouter} from "next/router";
-import {IUserStore} from "../models/types";
-import {UserStore} from "../store/UserStore";
+import React, { useEffect, useState } from "react";
+import { useStores } from "../store/StoreContext";
+import { useRouter } from "next/router";
+import { IUserStore } from "../models/types";
+import { UserStore } from "../store/UserStore";
 
 const ProfileIconComponent: React.FC = () => {
-    const [user, setUser] = useState({} as IUserStore)
-    const [userStore, setUserStore] = useState({} as UserStore )
+    const [user, setUser] = useState({} as IUserStore);
+    const [userStore, setUserStore] = useState({} as UserStore);
     const rootStore = useStores();
-    const router = useRouter()
+    const router = useRouter();
     useEffect(() => {
-        setUser(rootStore.UserStore.user)
-        setUserStore(rootStore.UserStore)
-    }, [])
+        setUser(rootStore.UserStore.user);
+        setUserStore(rootStore.UserStore);
+    }, []);
 
     const [bIsAccountMenu, setBIsAccountMenu] = useState(false);
     const [loginMenuAnchor, setLoginMenuAnchor] = useState<null | HTMLElement>(
@@ -29,12 +29,11 @@ const ProfileIconComponent: React.FC = () => {
         setLoginMenuAnchor(null);
         setBIsAccountMenu(false);
     };
-    const handleLogout=()=>{
-        userStore.Logout().then(()=>{
-            location.replace("/")
-        })
-
-    }
+    const handleLogout = () => {
+        userStore.Logout().then(() => {
+            location.replace("/");
+        });
+    };
 
     const handleAccountIconPressed = () => {
         router.push(`/user/${user.id}`);
@@ -53,35 +52,25 @@ const ProfileIconComponent: React.FC = () => {
             {user.isAuth ? (
                 <>
                     <MenuItem>
-                        <Link href={`/user/${user.id}`}>
-                            <Button variant="outlined" color="success">
-                                Profile
-                            </Button>
-                        </Link>
+                        <Link href={`/user/${user.id}`}>Profile</Link>
                     </MenuItem>
-                    <MenuItem>
-                        <Button variant="outlined" color="error" onClick={handleLogout}>
-                            Log out
-                        </Button>
-                    </MenuItem>
-
-
+                    <MenuItem onClick={handleLogout}>Log out</MenuItem>
                 </>
-            ) : (<>
-                <Link href={"/auth/signin"}>
-                    <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
-                </Link>
-                <Link href={"/auth/signup"}>
-                    <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-                </Link>
-            </>)
-            }
-
+            ) : (
+                <>
+                    <Link href={"/auth/signin"}>
+                        <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+                    </Link>
+                    <Link href={"/auth/signup"}>
+                        <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+                    </Link>
+                </>
+            )}
         </Menu>
     );
 
     return (
-        <Box sx={{display: {xs: "flex"}}}>
+        <Box sx={{ display: { xs: "flex" } }}>
             {user.isAuth ? (
                 <>
                     <IconButton
@@ -95,7 +84,10 @@ const ProfileIconComponent: React.FC = () => {
                         {user.imgUrl ? (
                             <Avatar src={user.imgUrl}></Avatar>
                         ) : (
-                            <Avatar>{user.name != null && user.name.slice(0, 1).toUpperCase()}</Avatar>
+                            <Avatar>
+                                {user.name != null &&
+                                    user.name.slice(0, 1).toUpperCase()}
+                            </Avatar>
                         )}
                     </IconButton>
                 </>
@@ -111,11 +103,10 @@ const ProfileIconComponent: React.FC = () => {
                     >
                         <Avatar></Avatar>
                     </IconButton>
-
                 </>
             )}
             {loginMenu}
         </Box>
     );
 };
-export default  ProfileIconComponent;
+export default ProfileIconComponent;
