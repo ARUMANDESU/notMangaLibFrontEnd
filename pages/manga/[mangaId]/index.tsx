@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import { IManga, serverUrl } from "../../../models/types";
+import { IChapter, IManga, serverUrl } from "../../../models/types";
 import Image from "next/image";
 import { Box, Chip, Divider, Grid, Tab } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -10,7 +10,13 @@ import MangaDescription from "../../../components/manga/MangaDescription";
 import ChapterList from "../../../components/manga/ChapterList";
 import Link from "next/link";
 
-const Index = ({ manga }: { manga: IManga }) => {
+const Index = ({
+    manga,
+    chapters,
+}: {
+    manga: IManga;
+    chapters: IChapter[];
+}) => {
     const router = useRouter();
     const { mangaId } = router.query;
     const genre = manga.type.split(",");
@@ -60,19 +66,7 @@ const Index = ({ manga }: { manga: IManga }) => {
                         <Link href={`/manga/${manga.id}/add-chapter`}>
                             Add Chapter
                         </Link>
-                        <ChapterList
-                            chapters={[
-                                {
-                                    id: 1,
-                                    title: "something",
-                                    volumeNumber: 1,
-                                    chapterNumber: 1,
-                                    date: Date.now(),
-                                    mangaId: 1,
-                                    images: ["lol"],
-                                },
-                            ]}
-                        />
+                        <ChapterList chapters={chapters} />
                     </TabPanel>
                     <TabPanel value="3">Comments...</TabPanel>
                 </TabContext>
@@ -96,6 +90,6 @@ export const getServerSideProps: GetServerSideProps<{
         });
 
     return {
-        props: { manga: data.manga },
+        props: { manga: data.manga, chapters: data.chapters },
     };
 };

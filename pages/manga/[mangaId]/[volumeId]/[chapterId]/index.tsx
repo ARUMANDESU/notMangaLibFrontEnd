@@ -9,9 +9,8 @@ const Index = ({ chapter }: { chapter: IChapter }) => {
     const { mangaId, volumeId, chapterId } = router.query;
     return (
         <div>
-            <h1>{mangaId}</h1>
-            <h1>{volumeId}</h1>
-            <h1>{chapterId}</h1>
+            <h3>volume: {volumeId}</h3>
+            <h3>chapter: {chapterId}</h3>
             <>
                 {chapter.images?.map((image) => {
                     if (image != "") {
