@@ -9,14 +9,14 @@ const Manga = ({ manga }: { manga: IManga }) => {
     const img = manga.mangaImg == null ? "" : manga.mangaImg;
     return (
         <Grid2 xs={1.5}>
-            <Link href={`/manga/${manga.id}`}>
-                <Box
-                    sx={{
-                        width: 150,
-                        height: 280,
-                        flexGrow: 1,
-                    }}
-                >
+            <Box
+                sx={{
+                    width: 150,
+                    height: 280,
+                    flexGrow: 1,
+                }}
+            >
+                <Link href={`/manga/${manga.id}`}>
                     <Image
                         src={img}
                         alt={manga.name + " " + manga.author}
@@ -24,8 +24,8 @@ const Manga = ({ manga }: { manga: IManga }) => {
                         height={220}
                     />
                     <Typography>{manga.name}</Typography>
-                </Box>
-            </Link>
+                </Link>
+            </Box>
         </Grid2>
     );
 };

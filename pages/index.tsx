@@ -7,12 +7,6 @@ import { Box, Typography } from "@mui/material";
 export default function Home({ mangas }: { mangas: IManga[] }) {
     return (
         <div>
-            {/*<Image src={`${serverUrl}static/images/HomePageImage.png`}
-                   alt={"HomePageImage"}
-                   width={"1920"}
-                   height={"400"}
-            />*/}
-
             <Image
                 src={`${serverUrl}static/images/HomePageImage.png`}
                 alt={"HomePageImage"}

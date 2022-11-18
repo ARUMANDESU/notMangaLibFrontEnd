@@ -3,13 +3,22 @@ import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import { IManga, serverUrl } from "../../../models/types";
 import Image from "next/image";
-import { Chip, Divider, Grid } from "@mui/material";
+import { Box, Chip, Divider, Grid, Tab } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import MangaDescription from "../../../components/manga/MangaDescription";
+import ChapterList from "../../../components/manga/ChapterList";
+import Link from "next/link";
 
 const Index = ({ manga }: { manga: IManga }) => {
     const router = useRouter();
     const { mangaId } = router.query;
     const genre = manga.type.split(",");
+    const [value, setValue] = React.useState("1");
+
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
     return (
         <Grid
             container
@@ -25,26 +34,48 @@ const Index = ({ manga }: { manga: IManga }) => {
                 />
             </Grid>
             <Grid item xs={12} sm={8} md={7}>
-                <Typography variant="h3" sx={{ mb: 5 }}>
-                    {manga.name}
-                </Typography>
-                <Typography variant="h6" sx={{ my: 1 }}>
-                    {`Author: ${manga.author}`}
-                </Typography>
-                <Typography variant="h6" sx={{ my: 1 }}>
-                    {`Title status: `}
-                    <Chip label={manga.status} variant="outlined" />
-                </Typography>
-                <Typography variant="h6" sx={{ my: 1 }}>
-                    {`Title type: `}
-                    <Chip label={genre[0]} variant="outlined" />
-                </Typography>
-                <Divider />
-                <Typography variant="subtitle1">
-                    {`Description: `}
-                    <br />
-                    {manga.description}
-                </Typography>
+                <TabContext value={value}>
+                    <Typography variant="h4" sx={{ mb: 5 }}>
+                        {manga.name}
+                    </Typography>
+                    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                        <TabList
+                            onChange={handleChange}
+                            aria-label="lab API tabs example"
+                        >
+                            <Tab label="Description" value="1" />
+                            <Tab label="Chapters" value="2" />
+                            <Tab label="Comments" value="3" />
+                        </TabList>
+                    </Box>
+                    <TabPanel value="1">
+                        <MangaDescription
+                            author={manga.author}
+                            status={manga.status}
+                            genre={genre}
+                            description={manga.description}
+                        />
+                    </TabPanel>
+                    <TabPanel value="2">
+                        <Link href={`/manga/${manga.id}/add-chapter`}>
+                            Add Chapter
+                        </Link>
+                        <ChapterList
+                            chapters={[
+                                {
+                                    id: 1,
+                                    title: "something",
+                                    volumeNumber: 1,
+                                    chapterNumber: 1,
+                                    date: Date.now(),
+                                    mangaId: 1,
+                                    images: ["lol"],
+                                },
+                            ]}
+                        />
+                    </TabPanel>
+                    <TabPanel value="3">Comments...</TabPanel>
+                </TabContext>
             </Grid>
         </Grid>
     );
