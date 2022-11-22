@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { CloudUpload, Create, Delete } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import { serverUrl } from "../../../models/types";
+import { serverUrl } from "../../../utils/models";
+import { handlenNotAuth } from "../../../utils/util";
 
 const Index = () => {
     const router = useRouter();
@@ -33,9 +34,15 @@ const Index = () => {
             credentials: "include",
             body: data,
         });
-        await response.json().then((res) => {
-            router.push(`http://localhost:3000/manga/${res.id}`);
-        });
+        handlenNotAuth({ status: response.status, router });
+        await response
+            .json()
+            .then((res) => {
+                router.push(`http://localhost:3000/manga/${res.id}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (

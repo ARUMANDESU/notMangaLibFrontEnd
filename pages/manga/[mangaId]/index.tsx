@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import { IChapter, IManga, serverUrl } from "../../../models/types";
+import { IChapter, IManga, serverUrl } from "../../../utils/models";
 import Image from "next/image";
 import { Box, Chip, Divider, Grid, Tab } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import MangaDescription from "../../../components/manga/MangaDescription";
 import ChapterList from "../../../components/manga/ChapterList";
 import Link from "next/link";
+import Button from "@mui/material/Button";
 
 const Index = ({
     manga,
@@ -63,9 +64,13 @@ const Index = ({
                         />
                     </TabPanel>
                     <TabPanel value="2">
-                        <Link href={`/manga/${manga.id}/add-chapter`}>
+                        <Button
+                            onClick={() => {
+                                router.push(`/manga/${manga.id}/add-chapter`);
+                            }}
+                        >
                             Add Chapter
-                        </Link>
+                        </Button>
                         <ChapterList chapters={chapters} />
                     </TabPanel>
                     <TabPanel value="3">Comments...</TabPanel>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Manga from "../components/manga/Manga";
-import { IManga, serverUrl } from "../models/types";
+import { IManga, serverUrl } from "../utils/models";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import { Box, Typography } from "@mui/material";
 

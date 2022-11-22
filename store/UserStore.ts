@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import { RootStoreIml } from "./RootStore";
 import { persist } from "mobx-persist";
 import { enableStaticRendering } from "mobx-react";
-import { IUserStore, serverUrl } from "../models/types";
+import { IUserStore, serverUrl } from "../utils/models";
 
 if (typeof window !== "undefined") {
     const isServer = typeof window === "undefined";
@@ -54,6 +54,7 @@ export class UserStore {
     async signInUser(params: any = {}) {
         await fetch(`${serverUrl}signin`, {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(params),
         })

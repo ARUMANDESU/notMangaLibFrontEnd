@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useStores } from "../../store/StoreContext";
 import { useRouter } from "next/router";
-import { serverUrl } from "../../models/types";
+import { serverUrl } from "../../utils/models";
 
 export default function SignIn() {
     const rootStore = useStores();
@@ -22,6 +22,7 @@ export default function SignIn() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+
         userStore.signInUser({
             email: data.get("email"),
             password: data.get("password"),

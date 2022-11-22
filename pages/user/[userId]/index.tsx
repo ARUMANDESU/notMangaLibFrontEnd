@@ -1,11 +1,11 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import { IUserStore, serverUrl } from "../../../models/types";
+import { IUserStore, serverUrl } from "../../../utils/models";
 import Avatar from "@mui/material/Avatar";
 import { Grid, Typography } from "@mui/material";
 
 const avatarSx = { minWidth: 100, minHeight: 100 };
-const Index = ({ user }: { user: IUserStore }) => {
+const Index = ({ user,isOwner }: { user: IUserStore ,isOwner:boolean}) => {
     return (
         <Grid
             container
@@ -31,6 +31,7 @@ const Index = ({ user }: { user: IUserStore }) => {
             <Grid item xs={12} sm={8} md={9}>
                 <Typography variant="h4">{user.name}</Typography>
                 <Typography variant="h6">{`Role: ${user.role}`}</Typography>
+                <Typography variant="h6">{`Owner: ${isOwner}`}</Typography>
             </Grid>
         </Grid>
     );
@@ -51,6 +52,6 @@ export const getServerSideProps: GetServerSideProps<{
         });
 
     return {
-        props: { user: data.user },
+        props: { user: data.user,isOwner:data.owner},
     };
 };

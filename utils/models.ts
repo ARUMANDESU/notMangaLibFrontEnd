@@ -31,7 +31,7 @@ export interface IChapter {
     volumeNumber: number | null;
     title: string | null;
     images: string[] | null;
-    date: number | null;
+    dateString: string | null;
 }
 
 export const serverUrl = "http://localhost:5000/";

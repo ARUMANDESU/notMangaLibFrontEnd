@@ -1,5 +1,5 @@
 import React from "react";
-import { IManga } from "../../models/types";
+import { IManga } from "../../utils/models";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
@@ -8,7 +8,7 @@ import Link from "next/link";
 const Manga = ({ manga }: { manga: IManga }) => {
     const img = manga.mangaImg == null ? "" : manga.mangaImg;
     return (
-        <Grid2 xs={1.5}>
+        <Grid2 xs={2.5} md={1.5}>
             <Box
                 sx={{
                     width: 150,

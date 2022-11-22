@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useStores } from "../store/StoreContext";
 import { useRouter } from "next/router";
-import { IUserStore } from "../models/types";
+import { IUserStore } from "../utils/models";
 import { UserStore } from "../store/UserStore";
 
 const ProfileIconComponent: React.FC = () => {

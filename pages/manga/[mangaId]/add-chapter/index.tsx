@@ -8,8 +8,9 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Image from "next/image";
-import { serverUrl } from "../../../../models/types";
+import { serverUrl } from "../../../../utils/models";
 import { useRouter } from "next/router";
+import { handlenNotAuth } from "../../../../utils/util";
 
 const Index = () => {
     const router = useRouter();
@@ -27,6 +28,7 @@ const Index = () => {
                 body: data,
             }
         );
+        handlenNotAuth({ status: response.status, router });
         await response.json().then((res) => {
             router.push(
                 `http://localhost:3000/manga/${mangaId}/${res.volumeNumber}/${res.chapterNumber}`
@@ -70,12 +72,12 @@ const Index = () => {
                         <Grid item xs={6}>
                             <TextField
                                 autoComplete="given-name"
-                                name="chapterNumber"
+                                name="volumeNumber"
                                 type="number"
                                 required
                                 fullWidth
-                                id="chapterNumber"
-                                label="Chapter"
+                                id="volumeNumber"
+                                label="Volume"
                                 autoFocus
                                 defaultValue=""
                             />
@@ -83,12 +85,12 @@ const Index = () => {
                         <Grid item xs={6}>
                             <TextField
                                 autoComplete="given-name"
-                                name="volumeNumber"
+                                name="chapterNumber"
                                 type="number"
                                 required
                                 fullWidth
-                                id="volumeNumber"
-                                label="Volume"
+                                id="chapterNumber"
+                                label="Chapter"
                                 autoFocus
                                 defaultValue=""
                             />
